@@ -1,9 +1,9 @@
 # João André Bolas Soares
 
-Senior software engineer in Barreiro, Portugal. I build backend systems in Go and
-TypeScript — microservices, CI/CD platforms, and lately agentic AI workflows.
+**Currently** · Senior Software Engineer at SWORD Health — Go, TypeScript, agentic AI
 
-![Contribution activity over the last 12 months](heatmap.svg)
+Nine years building backend systems: REST and gRPC behind BFFs, CI/CD platforms, and the
+observability that keeps them debuggable. Based in Barreiro, Portugal.
 
 - **Backend & distributed systems** — Go, Node.js, REST and gRPC behind BFFs, PostgreSQL, MySQL
 - **AI agentic workflows & DevX** — LangChain, LangGraph, Mastra, Langfuse, OpenCode
