@@ -42,7 +42,8 @@ LEVEL_INDEX = {
 
 CELL, GAP = 11, 3
 STEP = CELL + GAP
-LEFT, TOP = 38, 24
+PAD = 16
+LEFT, TOP = PAD + 38, PAD + 24
 FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -78,14 +79,18 @@ def render(calendar):
     if total == 0:
         raise SystemExit("total contributions is 0 - refusing to commit an empty heatmap")
 
-    width = LEFT + len(weeks) * STEP - GAP + 10
-    height = TOP + 7 * STEP - GAP + 34
+    width = LEFT + len(weeks) * STEP - GAP + PAD + 10
+    height = TOP + 7 * STEP - GAP + PAD + 34
 
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}" role="img" '
         f'aria-label="{esc(str(total))} contributions in the last 12 months">',
         f"<title>{total} contributions in the last 12 months</title>",
+        # White panel: GitHub renders images on both light and dark backgrounds, and the
+        # darkest cells disappear without one. Matches the CV's document treatment.
+        f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="8" '
+        f'fill="#ffffff" stroke="#d9dce2"/>',
         f'<g font-family="{FONT}" font-size="11" fill="#5c6470">',
     ]
 
@@ -97,13 +102,13 @@ def render(calendar):
         if month != last_month:
             if i - last_label_col >= 3:
                 x = LEFT + i * STEP
-                parts.append(f'<text x="{x}" y="14">{MONTHS[month]}</text>')
+                parts.append(f'<text x="{x}" y="{PAD + 4}">{MONTHS[month]}</text>')
                 last_label_col = i
             last_month = month
 
     for row, label in ((1, "Mon"), (3, "Wed"), (5, "Fri")):
         y = TOP + row * STEP + CELL - 2
-        parts.append(f'<text x="0" y="{y}">{label}</text>')
+        parts.append(f'<text x="{PAD}" y="{y}">{label}</text>')
 
     for col, week in enumerate(weeks):
         for row, day in enumerate(week["contributionDays"]):
@@ -117,9 +122,9 @@ def render(calendar):
             )
 
     parts.append("</g>")
-    caption_y = height - 5
+    caption_y = height - PAD - 2
     parts.append(
-        f'<text x="0" y="{caption_y}" font-family="{FONT}" font-size="12" '
+        f'<text x="{PAD}" y="{caption_y}" font-family="{FONT}" font-size="12" '
         f'fill="#5c6470">{total:,} contributions in the last 12 months</text>'
     )
     parts.append("</svg>")
