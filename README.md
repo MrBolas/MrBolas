@@ -3,7 +3,7 @@
 Senior software engineer in Barreiro, Portugal. I build backend systems in Go and
 TypeScript — microservices, CI/CD platforms, and lately agentic AI workflows.
 
-![2201 contributions in the last 12 months](heatmap.svg)
+![Contribution activity over the last 12 months](heatmap.svg)
 
 - **Backend & distributed systems** — Go, Node.js, REST and gRPC behind BFFs, PostgreSQL, MySQL
 - **AI agentic workflows & DevX** — LangChain, LangGraph, Mastra, Langfuse, OpenCode
